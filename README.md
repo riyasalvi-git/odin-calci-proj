@@ -3,11 +3,12 @@ console.log(numA, operator, numB, result)
 
 ## To Dos:
 - gotchas
+    - reound up all big numbers with `nume+count`
 - limit numdisplay size
 - edit readme line positions
 
 ## Theories:
-- 12+7-1 should be 18 but instead of minusing it is adding and making it 20.
+- number changes on adding more than 10 characters
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]

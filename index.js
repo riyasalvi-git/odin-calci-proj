@@ -9,6 +9,7 @@ let num = '';
 let numA = '';
 let numB = '';
 let operator;
+let i = 0;
 
 acBtn.addEventListener("click", () => {
 	result = '';
@@ -21,9 +22,15 @@ acBtn.addEventListener("click", () => {
 
 numbers.forEach((btn) => {
 	btn.addEventListener("click", () => {
+		++i;
 		let singleNum = btn.textContent;
 		num += singleNum;
-		display.textContent = num;
+		if (num.length > 10) {
+			display.textContent = num.slice(5) + "e" + '+' + i
+		}
+		else {
+			display.textContent = num;
+		}
 	});
 });
 
@@ -47,28 +54,32 @@ operatorBtn.forEach((btn) => {
 equals.addEventListener("click", showResult);
 
 function showResult() {
+	let answer;
 	numB = + num;
 	num = '';
 	operate(numA, numB, operator);
+	if (result % 1 != 0) {
+		answer = (+ result).toFixed(2);
+	}
+	else {
+		answer = result;
+	}
+	display.textContent = answer;
 }
 
 
 
 function add(numA, numB) {
 	result = numA + numB;
-	display.textContent = result;
 }
 function subtract(numA, numB) {
 	result = numA - numB;
-	display.textContent = result;
 }
 function multiply(numA, numB) {
 	result = numA * numB;
-	display.textContent = result;
 }
 function divide(numA, numB) {
 	result = numA / numB;
-	display.textContent = result;
 }
 
 
