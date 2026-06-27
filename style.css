@@ -20,7 +20,6 @@ body {
 	border-radius: 14px;
 	background-color: #9BC4A3;
 	margin-bottom: 30px;
-	font-size: 80px;
 	padding: 20px;
 	height: 145px;
 	width: 480px;
@@ -29,9 +28,8 @@ body {
 }
 
 .numdisplay {
+	font-size: 80px;
 	font-family: 'Courier New', Courier, monospace;
-	width: fit-content;
-	height: fit-content;
 	padding: 0px;
 }
 

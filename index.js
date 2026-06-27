@@ -4,72 +4,87 @@ let operatorBtn = document.querySelectorAll(".operators");
 let acBtn = document.querySelector("#allClear");
 let equals = document.querySelector("#equals");
 
+let result = '';
+let num = '';
 let numA = '';
 let numB = '';
 let operator;
 
 acBtn.addEventListener("click", () => {
+	result = '';
+	num = '';
 	numA = '';
 	numB = '';
 	operator = '';
 	display.textContent = '';
 });
 
+numbers.forEach((btn) => {
+	btn.addEventListener("click", () => {
+		let singleNum = btn.textContent;
+		num += singleNum;
+		display.textContent = num;
+	});
+});
+
 operatorBtn.forEach((btn) => {
 	btn.addEventListener("click", () => {
-		operator = btn.textContent;
-		display.textContent = operator;
+		if (numA != '' && num != '' && operator != '') {
+			showResult();
+			numA = result;
+			operator = btn.textContent;
+			display.textContent += operator;
+		}
+		else {
+			operator = btn.textContent;
+			display.textContent = operator;
+			numA = + num;
+			num = '';
+		}
 	});
 });
 
-numbers.forEach((btn) => {
-	btn.addEventListener("click", () => {
-		let num = btn.textContent;
-		numA += num;
-		display.textContent = numA;
-	});
-});
+equals.addEventListener("click", showResult);
 
-numbers.forEach((btn) => {
-	btn.addEventListener("click", () => {
-		let num = btn.textContent;
-		numB += num;
-		display.textContent = numB;
-	});
-});
-
-
-
+function showResult() {
+	numB = + num;
+	num = '';
+	operate(numA, numB, operator);
+}
 
 
 
 function add(numA, numB) {
-	return numA + numB;
+	result = numA + numB;
+	display.textContent = result;
 }
 function subtract(numA, numB) {
-	return numA - numB;
+	result = numA - numB;
+	display.textContent = result;
 }
 function multiply(numA, numB) {
-	return numA * numB;
+	result = numA * numB;
+	display.textContent = result;
 }
 function divide(numA, numB) {
-	return numA / numB;
+	result = numA / numB;
+	display.textContent = result;
 }
 
 
 function operate(numA, numB, operator) {
 	switch (operator) {
 		case "+":
-			add();
+			add(numA, numB);
 			break;
 		case "-":
-			subtract();
+			subtract(numA, numB);
 			break;
 		case "x":
 			multiply(numA, numB);
 			break;
 		case "/":
-			divide();
+			divide(numA, numB);
 			break;
 	}
 }
