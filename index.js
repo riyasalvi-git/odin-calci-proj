@@ -18,6 +18,7 @@ acBtn.addEventListener("click", () => {
 	numB = '';
 	operator = '';
 	display.textContent = '';
+	i = 0
 });
 
 numbers.forEach((btn) => {
@@ -26,7 +27,8 @@ numbers.forEach((btn) => {
 		let singleNum = btn.textContent;
 		num += singleNum;
 		if (num.length > 10) {
-			display.textContent = num.slice(5) + "e" + '+' + i
+			let displayStr = num.substring(0, 6);
+			display.textContent = displayStr + "e" + '+' + i;
 		}
 		else {
 			display.textContent = num;
@@ -59,7 +61,13 @@ function showResult() {
 	num = '';
 	operate(numA, numB, operator);
 	if (result % 1 != 0) {
-		answer = (+ result).toFixed(2);
+		if ((result).toString().length > 10) {
+			let displayStr = result.substring(0, 6);
+			answer = displayStr + "e" + '+' + i;
+		}
+		else {
+			answer = (+ result).toFixed(2);
+		}
 	}
 	else {
 		answer = result;
