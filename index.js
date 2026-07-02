@@ -8,7 +8,7 @@ let result = '';
 let num = '';
 let numA = '';
 let numB = '';
-let operator;
+let operator = '';
 let i = 0;
 
 acBtn.addEventListener("click", () => {
@@ -38,17 +38,22 @@ numbers.forEach((btn) => {
 
 operatorBtn.forEach((btn) => {
 	btn.addEventListener("click", () => {
-		if (numA != '' && num != '' && operator != '') {
-			showResult();
-			numA = result;
-			operator = btn.textContent;
-			display.textContent += operator;
+		if (numA && num == '' && operator) {
+			return;
 		}
 		else {
-			operator = btn.textContent;
-			display.textContent = operator;
-			numA = + num;
-			num = '';
+			if (numA != '' && num != '' && operator != '') {
+				showResult();
+				numA = result;
+				operator = btn.textContent;
+				display.textContent += operator;
+			}
+			else {
+				operator = btn.textContent;
+				display.textContent = operator;
+				numA = + num;
+				num = '';
+			}
 		}
 	});
 });
@@ -56,21 +61,27 @@ operatorBtn.forEach((btn) => {
 equals.addEventListener("click", showResult);
 
 function showResult() {
-	let answer;
 	numB = + num;
 	num = '';
-	operate(numA, numB, operator);
-	if (result % 1 != 0) {
-		if ((result).toString().length > 10) {
-			let displayStr = result.substring(0, 6);
-			answer = displayStr + "e" + '+' + i;
-		}
-		else {
-			answer = (+ result).toFixed(2);
-		}
+	let answer;
+	if (operator && numB == 0) {
+		answer = 'Bad Math!';
 	}
 	else {
-		answer = result;
+		operate(numA, numB, operator);
+		if (result % 1 != 0) {
+			let toString = result.toString();
+			if (toString.length > 10) {
+				let displayStr = toString.substring(0, 6);
+				answer = displayStr + "e" + '+' + i;
+			}
+			else {
+				answer = (+ result).toFixed(2);
+			}
+		}
+		else {
+			answer = result;
+		}
 	}
 	display.textContent = answer;
 }
