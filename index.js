@@ -5,6 +5,7 @@ let acBtn = document.querySelector("#allClear");
 let equals = document.querySelector("#equals");
 
 let result = '';
+let answer = '';
 let num = '';
 let numA = '';
 let numB = '';
@@ -13,6 +14,7 @@ let i = 0;
 
 acBtn.addEventListener("click", () => {
 	result = '';
+	answer = '';
 	num = '';
 	numA = '';
 	numB = '';
@@ -26,12 +28,21 @@ numbers.forEach((btn) => {
 		++i;
 		let singleNum = btn.textContent;
 		num += singleNum;
-		if (num.length > 10) {
-			let displayStr = num.substring(0, 6);
-			display.textContent = displayStr + "e" + '+' + i;
+		if (answer && display.textContent == answer) {
+			i = 1
+			numA = '';
+			numB = '';
+			operator = '';
+			display.textContent = num;
 		}
 		else {
-			display.textContent = num;
+			if (num.length > 10) {
+				let displayStr = num.substring(0, 6);
+				display.textContent = displayStr + "e" + '+' + i;
+			}
+			else {
+				display.textContent = num;
+			}
 		}
 	});
 });
@@ -44,13 +55,13 @@ operatorBtn.forEach((btn) => {
 		else {
 			if (numA != '' && num != '' && operator != '') {
 				showResult();
-				numA = result;
+				numA = answer;
 				operator = btn.textContent;
 				display.textContent += operator;
 			}
 			else {
 				operator = btn.textContent;
-				display.textContent = operator;
+				display.textContent += operator;
 				numA = + num;
 				num = '';
 			}
@@ -63,7 +74,6 @@ equals.addEventListener("click", showResult);
 function showResult() {
 	numB = + num;
 	num = '';
-	let answer;
 	if (operator && numB == 0) {
 		answer = 'Bad Math!';
 	}
