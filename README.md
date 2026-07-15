@@ -8,7 +8,7 @@ console.log(numA, operator, numB, num, result)
 - edit readme line positions
 
 ## Current:
-- result showing to be undefined post operation.
+make backspace work
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]

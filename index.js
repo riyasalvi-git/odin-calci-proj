@@ -3,6 +3,7 @@ let numbers = document.querySelectorAll(".numbers");
 let operatorBtn = document.querySelectorAll(".operators");
 let acBtn = document.querySelector("#allClear");
 let equals = document.querySelector("#equals");
+let point = document.querySelector("#point");
 
 let result = '';
 let answer = '';
@@ -43,6 +44,16 @@ numbers.forEach((btn) => {
 			else {
 				display.textContent = num;
 			}
+		}
+		if (num.includes('.')) {
+			point.disabled = true;
+			display.textContent = num;
+			point.style.background = 'white';
+			point.style.color = 'black';
+
+		}
+		else {
+			point.disabled = false;
 		}
 	});
 });
