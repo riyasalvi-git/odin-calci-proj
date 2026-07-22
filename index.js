@@ -4,6 +4,7 @@ let operatorBtn = document.querySelectorAll(".operators");
 let acBtn = document.querySelector("#allClear");
 let equals = document.querySelector("#equals");
 let point = document.querySelector("#point");
+let backspace = document.querySelector("#backspace");
 
 let result = '';
 let answer = '';
@@ -29,7 +30,7 @@ numbers.forEach((btn) => {
 		++i;
 		let singleNum = btn.textContent;
 		num += singleNum;
-		if (answer && display.textContent == answer) {
+		if (answer && display.textContent == answer) {  //start new calculation after clicking on num when answer is displayed
 			i = 1
 			numA = '';
 			numB = '';
@@ -37,7 +38,7 @@ numbers.forEach((btn) => {
 			display.textContent = num;
 		}
 		else {
-			if (num.length > 10) {
+			if (num.length > 10) {   //stop overflowing the display for big nums but make sure to store it correctly
 				let displayStr = num.substring(0, 6);
 				display.textContent = displayStr + "e" + '+' + i;
 			}
@@ -45,7 +46,7 @@ numbers.forEach((btn) => {
 				display.textContent = num;
 			}
 		}
-		if (num.includes('.')) {
+		if (num.includes('.')) {     // no double decimal
 			point.disabled = true;
 			display.textContent = num;
 			point.style.background = 'white';
@@ -64,17 +65,22 @@ operatorBtn.forEach((btn) => {
 			return;
 		}
 		else {
-			if (numA != '' && num != '' && operator != '') {
+			if (numA && num && operator) {
 				showResult();
 				numA = answer;
 				operator = btn.textContent;
-				display.textContent += operator;
+				display.textContent = operator;
 			}
 			else {
 				operator = btn.textContent;
-				display.textContent += operator;
-				numA = + num;
-				num = '';
+				display.textContent = operator;
+				if (numA) {
+					return;
+				}
+				else {
+					numA = + num;
+					num = '';
+				}
 			}
 		}
 	});
@@ -104,10 +110,32 @@ function showResult() {
 			answer = result;
 		}
 	}
-	display.textContent = answer;
+	display.textContent = answer.toString();
 }
 
-
+backspace.addEventListener("click", () => {
+	switch (display.textContent) {
+		case num: {
+			let n = num.length - 1;
+			num = num.slice(0, n);
+			display.textContent = num;
+			break;
+		}
+		case operator: {
+			operator = "";
+			display.textContent = operator;
+			break;
+		}
+		default: {
+			num = answer;
+			let str = num.toString();
+			let n = str.length - 1;
+			num = str.slice(0, n);
+			display.textContent = num;
+			break;
+		}
+	}
+});
 
 function add(numA, numB) {
 	result = numA + numB;
