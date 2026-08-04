@@ -9,8 +9,11 @@ console.log(numA, operator, numB, num, result)
 - edit readme line positions
 
 ## Current:
-make backspace work
-- not detecting answer as display text
+add keyboard support
+- numbers
+- operators
+- backspace
+- enter
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]
@@ -20,3 +23,4 @@ make backspace work
 - `length` is only counted of strings and arrays.
 - When setting a variable for a conditional statement as a condition, it will check if the variable is empty. [line 31, js]
 - When want to use same varaible in multiple places. Put those code blocks in curly braces to create scopable blocks.[line 118, js]
+- If there is no specific element for focus then just select the entire body.

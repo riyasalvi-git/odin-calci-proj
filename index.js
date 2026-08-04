@@ -1,4 +1,5 @@
 let display = document.querySelector(".numdisplay");
+let body = document.querySelector("body");
 let numbers = document.querySelectorAll(".numbers");
 let operatorBtn = document.querySelectorAll(".operators");
 let acBtn = document.querySelector("#allClear");
@@ -23,6 +24,22 @@ acBtn.addEventListener("click", () => {
 	operator = '';
 	display.textContent = '';
 	i = 0
+});
+
+body.addEventListener("keydown", (e) => {
+	numbers.forEach((btn) => {
+		if (e.key === btn.textContent) {
+			display.textContent = e.key;
+		}
+	});
+	operatorBtn.forEach((btn) => {
+		if (e.key === btn.textContent) {
+			display.textContent = e.key;
+		}
+		else if (e.key === '*') {
+			display.textContent = "x";
+		}
+	});
 });
 
 numbers.forEach((btn) => {
