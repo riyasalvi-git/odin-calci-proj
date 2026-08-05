@@ -7,13 +7,13 @@ console.log(numA, operator, numB, num, result)
 - The actual longform numbers on the side
 - add comments for each feature added
 - edit readme line positions
+- clean operations code
 
 ## Current:
 add keyboard support
 - numbers
-- operators
-- backspace
-- enter
+- number funct btn not defined
+- focus on display and do keydown on display
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]
