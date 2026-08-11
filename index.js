@@ -15,7 +15,9 @@ let numB = '';
 let operator = '';
 let i = 0;
 
-acBtn.addEventListener("click", () => {
+acBtn.addEventListener("click", allClear);
+
+function allClear() {
 	result = '';
 	answer = '';
 	num = '';
@@ -24,17 +26,17 @@ acBtn.addEventListener("click", () => {
 	operator = '';
 	display.textContent = '';
 	i = 0
-});
+}
 
 body.addEventListener("keydown", (e) => {
 	numbers.forEach((btn) => {
 		if (e.key === btn.textContent) {
-			display.textContent = e.key;
+			numpad();
 		}
 	});
 	operatorBtn.forEach((btn) => {
 		if (e.key === btn.textContent) {
-			display.textContent = e.key;
+			operatorfunct();
 		}
 		else if (e.key === '*') {
 			display.textContent = "x";
@@ -46,15 +48,18 @@ body.addEventListener("keydown", (e) => {
 	else if (e.key === "Enter") {
 		showResult();
 	}
+	else if (e.key === "Escape") {
+		allClear();
+	}
 });
 
 numbers.forEach((btn) => {
-	btn.addEventListener("click", numpad());
+	btn.addEventListener("click", numpad);
 });
 
 function numpad() {
 	++i;
-	let singleNum = btn.textContent;
+	let singleNum = this.textContent;
 	num += singleNum;
 	if (answer && display.textContent == answer) {  //start new calculation after clicking on num when answer is displayed
 		i = 1
@@ -96,11 +101,11 @@ function operatorfunct() {
 		if (numA && num && operator) {
 			showResult();
 			numA = answer;
-			operator = btn.textContent;
+			operator = this.textContent;
 			display.textContent = operator;
 		}
 		else {
-			operator = btn.textContent;
+			operator = this.textContent;
 			display.textContent = operator;
 			if (numA) {
 				return;

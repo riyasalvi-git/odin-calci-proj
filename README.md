@@ -11,7 +11,7 @@ console.log(numA, operator, numB, num, result)
 
 ## Current:
 add keyboard support
-- numbers
+- this arg for btn
 - number funct btn not defined
 - focus on display and do keydown on display
 
