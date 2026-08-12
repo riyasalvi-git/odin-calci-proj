@@ -31,7 +31,7 @@ function allClear() {
 body.addEventListener("keydown", (e) => {
 	numbers.forEach((btn) => {
 		if (e.key === btn.textContent) {
-			numpad();
+			numpad(e);
 		}
 	});
 	operatorBtn.forEach((btn) => {
@@ -57,9 +57,15 @@ numbers.forEach((btn) => {
 	btn.addEventListener("click", numpad);
 });
 
-function numpad() {
+function numpad(e) {
 	++i;
-	let singleNum = this.textContent;
+	let singleNum;
+	if (e.type === "click") {
+		singleNum = this.textContent;
+	}
+	else if (e.type === "keydown") {
+		singleNum = e.key;
+	}
 	num += singleNum;
 	if (answer && display.textContent == answer) {  //start new calculation after clicking on num when answer is displayed
 		i = 1

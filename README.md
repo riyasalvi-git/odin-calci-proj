@@ -8,11 +8,11 @@ console.log(numA, operator, numB, num, result)
 - add comments for each feature added
 - edit readme line positions
 - clean operations code
+- delete test branch
 
 ## Current:
 add keyboard support
-- this arg for btn
-- number funct btn not defined
+- operator btn not working
 - focus on display and do keydown on display
 
 ## Learnings
