@@ -36,7 +36,7 @@ body.addEventListener("keydown", (e) => {
 	});
 	operatorBtn.forEach((btn) => {
 		if (e.key === btn.textContent) {
-			operatorfunct();
+			operatorfunct(e);
 		}
 		else if (e.key === '*') {
 			display.textContent = "x";
@@ -45,7 +45,7 @@ body.addEventListener("keydown", (e) => {
 	if (e.key === "Backspace") {
 		del();
 	}
-	else if (e.key === "Enter") {
+	else if (e.key === "Enter" || e.key === "=") {
 		showResult();
 	}
 	else if (e.key === "Escape") {
@@ -99,21 +99,41 @@ operatorBtn.forEach((btn) => {
 	btn.addEventListener("click", operatorfunct);
 });
 
-function operatorfunct() {
-	if (numA && num == '' && operator) {
+function operatorfunct(e) {
+	if (numA && num == '' && operator) { //no double operators
 		return;
 	}
+	else if (answer && display.textContent == answer) {  //start new calculation after clicking on an operator when answer is displayed
+		numA = answer;
+		if (e.type === "click") {
+			operator = this.textContent;
+		}
+		else if (e.type === "keydown") {
+			operator = e.key;
+		}
+		display.textContent = operator;
+	}
 	else {
-		if (numA && num && operator) {
+		if (numA && num && operator) { //complete the previous opearation and then continue
 			showResult();
 			numA = answer;
-			operator = this.textContent;
+			if (e.type === "click") {
+				operator = this.textContent;
+			}
+			else if (e.type === "keydown") {
+				operator = e.key;
+			}
 			display.textContent = operator;
 		}
-		else {
-			operator = this.textContent;
+		else { //normal
+			if (e.type === "click") {
+				operator = this.textContent;
+			}
+			else if (e.type === "keydown") {
+				operator = e.key;
+			}
 			display.textContent = operator;
-			if (numA) {
+			if (numA) {  // check this out
 				return;
 			}
 			else {

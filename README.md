@@ -9,11 +9,11 @@ console.log(numA, operator, numB, num, result)
 - edit readme line positions
 - clean operations code
 - delete test branch
+- fix calci size
+- seperate assing funcion for operator
 
 ## Current:
-add keyboard support
-- operator btn not working
-- focus on display and do keydown on display
+- after enter use the answer as numA
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]
