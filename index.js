@@ -1,4 +1,4 @@
-let display = document.querySelector(".numdisplay");
+let display = document.querySelector(".screen");
 let body = document.querySelector("body");
 let numbers = document.querySelectorAll(".numbers");
 let operatorBtn = document.querySelectorAll(".operators");
@@ -13,7 +13,6 @@ let num = '';
 let numA = '';
 let numB = '';
 let operator = '';
-let i = 0;
 
 acBtn.addEventListener("click", allClear);
 
@@ -25,7 +24,6 @@ function allClear() {
 	numB = '';
 	operator = '';
 	display.textContent = '';
-	i = 0
 }
 
 body.addEventListener("keydown", (e) => {
@@ -37,9 +35,6 @@ body.addEventListener("keydown", (e) => {
 	operatorBtn.forEach((btn) => {
 		if (e.key === btn.textContent) {
 			operatorfunct(e);
-		}
-		else if (e.key === '*') {
-			display.textContent = "x";
 		}
 	});
 	if (e.key === "Backspace") {
@@ -58,7 +53,6 @@ numbers.forEach((btn) => {
 });
 
 function numpad(e) {
-	++i;
 	let singleNum;
 	if (e.type === "click") {
 		singleNum = this.textContent;
@@ -68,24 +62,22 @@ function numpad(e) {
 	}
 	num += singleNum;
 	if (answer && display.textContent == answer) {  //start new calculation after clicking on num when answer is displayed
-		i = 1
 		numA = '';
 		numB = '';
 		operator = '';
 		display.textContent = num;
 	}
+	//stop overflowing the display for big nums but store it correctly
+	else if (num.length > 21) {
+		display.textContent = "infinite";
+		let finite = num.slice(0, 21);
+		num = finite;
+	}
 	else {
-		if (num.length > 10) {   //stop overflowing the display for big nums but make sure to store it correctly
-			let displayStr = num.substring(0, 6);
-			display.textContent = displayStr + "e" + '+' + i;
-		}
-		else {
-			display.textContent = num;
-		}
+		display.textContent = num;
 	}
 	if (num.includes('.')) {     // no double decimal
 		point.disabled = true;
-		display.textContent = num;
 		point.style.background = 'white';
 		point.style.color = 'black';
 
@@ -133,13 +125,8 @@ function operatorfunct(e) {
 				operator = e.key;
 			}
 			display.textContent = operator;
-			if (numA) {  // check this out
-				return;
-			}
-			else {
-				numA = + num;
-				num = '';
-			}
+			numA = + num;
+			num = '';
 		}
 	}
 }
@@ -149,16 +136,16 @@ equals.addEventListener("click", showResult);
 function showResult() {
 	numB = + num;
 	num = '';
-	if (operator && numB == 0) {
+	if (operator === "/" && numB == 0) {
 		answer = 'Bad Math!';
 	}
 	else {
 		operate(numA, numB, operator);
 		if (result % 1 != 0) {
 			let toString = result.toString();
-			if (toString.length > 10) {
-				let displayStr = toString.substring(0, 6);
-				answer = displayStr + "e" + '+' + i;
+			if (toString.length > 11) {
+				let displayStr = toString.substring(0, 7);
+				display.textContent = displayStr + "e" + '+' + i;
 			}
 			else {
 				answer = (+ result).toFixed(2);
@@ -168,7 +155,17 @@ function showResult() {
 			answer = result;
 		}
 	}
-	display.textContent = answer.toString();
+	let toStr = answer.toString();
+	if (toStr.length > 11 && toStr.length < 21) {
+		let displayStr = toStr.substring(0, 7);
+		display.textContent = displayStr + "e" + '+' + i;
+	}
+	else if (toStr.length > 21) {
+		display.textContent = "infinite";
+	}
+	else {
+		display.textContent = answer.toString();
+	}
 }
 
 backspace.addEventListener("click", del);
@@ -197,33 +194,19 @@ function del() {
 	}
 }
 
-function add(numA, numB) {
-	result = numA + numB;
-}
-function subtract(numA, numB) {
-	result = numA - numB;
-}
-function multiply(numA, numB) {
-	result = numA * numB;
-}
-function divide(numA, numB) {
-	result = numA / numB;
-}
-
-
 function operate(numA, numB, operator) {
 	switch (operator) {
 		case "+":
-			add(numA, numB);
+			result = numA + numB;
 			break;
 		case "-":
-			subtract(numA, numB);
+			result = numA - numB;
 			break;
-		case "x":
-			multiply(numA, numB);
+		case "*":
+			result = numA * numB;
 			break;
 		case "/":
-			divide(numA, numB);
+			result = numA / numB;
 			break;
 	}
 }

@@ -1,19 +1,24 @@
 # Calculator project
 console.log(numA, operator, numB, num, result)
 
-## To Dos:
+## Done:
 - gotchas
+- after enter use the answer as numA
+- fix multiplication key not working: change the "x" to "*"
 - fix showing bad math on every operation with 0
-- The actual longform numbers on the side
+- fix calci size to the screen
+- clean operations code
+- prevent text overflow and stretch screen to accomodate
+
+## To Dos:
 - add comments for each feature added
 - edit readme line positions
-- clean operations code
 - delete test branch
-- fix calci size
-- seperate assing funcion for operator
+- copy readme template
+- rearrange comments
 
 ## Current:
-- after enter use the answer as numA
+- seperate assing funcion for operator
 
 ## Learnings
 - Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]
@@ -24,3 +29,4 @@ console.log(numA, operator, numB, num, result)
 - When setting a variable for a conditional statement as a condition, it will check if the variable is empty. [line 31, js]
 - When want to use same varaible in multiple places. Put those code blocks in curly braces to create scopable blocks.[line 118, js]
 - If there is no specific element for focus then just select the entire body.
+- Make extra text to overflow on the next line `overflow-wrap` [line 31, stylesheet]
