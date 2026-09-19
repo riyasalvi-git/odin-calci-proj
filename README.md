@@ -1,32 +1,19 @@
 # Calculator project
 console.log(numA, operator, numB, num, result)
 
-## Done:
-- gotchas
-- after enter use the answer as numA
-- fix multiplication key not working: change the "x" to "*"
-- fix showing bad math on every operation with 0
-- fix calci size to the screen
-- clean operations code
-- prevent text overflow and stretch screen to accomodate
-
 ## To Dos:
-- add comments for each feature added
-- edit readme line positions
-- delete test branch
-- copy readme template
-- rearrange comments
 
 ## Current:
-- seperate assing funcion for operator
-
-## Learnings
-- Add multiple classes and ids to single style block by using comma. [line 45, stylesheet]
-- Think what other element can be used to support the function of the previous action.....
-- Convert a number in variable from string to number type by using (+ variable) [line 48, js]
-- The substring methods NEEDS start index. If given only one then it will consider that number as the start index.
-- `length` is only counted of strings and arrays.
-- When setting a variable for a conditional statement as a condition, it will check if the variable is empty. [line 31, js]
-- When want to use same varaible in multiple places. Put those code blocks in curly braces to create scopable blocks.[line 118, js]
-- If there is no specific element for focus then just select the entire body.
-- Make extra text to overflow on the next line `overflow-wrap` [line 31, stylesheet]
+- copy readme template make a snippet called read
+ 
+## Learnings:
+- Add multiple classes and ids to single style block by using comma. [line 40, stylesheet]
+- Think what other element can be used to support the function of the previous action [line 140, js]
+- Convert a number in variable from string to number type by using (+ variableName) [line 140, js]
+- The slice methods NEEDS start index. If given only one then it will consider that number as the start index. [line 196, js]
+- `length` is only counted of strings and arrays. [line 179, js]
+- When setting a variable for a conditional statement as a condition, it will check if the variable is empty. [line 76, js]
+- When want to use same variable in multiple places of the same code block eg. switch statement. Put those code blocks in curly braces to create scopable blocks.[line 195, js]
+- If there is no specific element for focus then just select the entire body. [line 18, js]
+- Make extra text to overflow on the next line `overflow-wrap` [line 30, stylesheet]
+- If a function/event is not responding then check the possible condition/function preventing it from doing so. [operator btn not working post answer display due to variables of line 105, js not being cleared in showResult()]
